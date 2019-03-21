@@ -24,3 +24,9 @@ hs_err_pid*
 *~
 jeter*
 
+/bin/
+	
+.classpath
+.gradle
+.project
+build

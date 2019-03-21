@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+
+repositories {
+    mavenCentral() 
+}
+
+dependencies {
+    compile 'net.sf.jtidy:jtidy:r938'
+    compile 'com.rometools:rome:1.12.0'
+    testCompile 'org.testng:testng:6.14.3' 
+}
+
+
+jar {
+    manifest {
+        attributes  'Main-Class': 'com.github.lindenb.alaune.Test',
+                    'Implementation-Title': 'ALaUne',
+                    'Implementation-Version': "1.0.0",
+                    'Built-By': System.getProperty('user.name'),
+                    'Built-Date': new Date(),
+                    'Built-JDK': System.getProperty('java.version'),
+                    'Built-Gradle': gradle.gradleVersion
+    }
+
+    // include all dependencies in jar
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+}
+
+mainClassName = 'com.github.lindenb.alaune.Test' 
